@@ -5,14 +5,19 @@ import (
 	"net/http/httputil"
 	"net/url"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
 
-	// Route definition
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	config.AllowHeaders = append(config.AllowHeaders, "Authorization") // Add "Authorization" header to allowed headers
 
+	// Route definition
+	router.Use(cors.New(config))
 	router.Any("/users/*path", handleService1)
 	router.Any("/stores/*path", handleService2)
 	router.Any("/products/*path", handleService3)
@@ -28,14 +33,14 @@ func main() {
 // Handler function for Service 1
 func handleService1(c *gin.Context) {
 	// Forward request to Service 1
+	reverseProxy("http://user-service:8080", c)
 	// reverseProxy("http://localhost:8080", c)
-	reverseProxy("http://localhost:8080", c)
 }
 
 // Handler function for Service 2
 func handleService2(c *gin.Context) {
 	// Forward request to Service 2
-	reverseProxy("http://localhost:8081", c)
+	reverseProxy("http://store-service:8081", c)
 	// store-service
 }
 func handleService3(c *gin.Context) {
