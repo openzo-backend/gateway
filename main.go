@@ -40,28 +40,28 @@ func handleService1(c *gin.Context) {
 // Handler function for Service 2
 func handleService2(c *gin.Context) {
 	// Forward request to Service 2
-	reverseProxy("http://store-service:8081", c)
+	reverseProxy("http://store-service:8080", c)
 	// store-service
 }
 func handleService3(c *gin.Context) {
 	// Forward request to Service 2
 	// reverseProxy("http://localhost:8082", c)
-	reverseProxy("http://product-service:8082", c)
+	reverseProxy("http://product-service:8080", c)
 }
 func handleService4(c *gin.Context) {
 	// Forward request to Service 2
 	// reverseProxy("http://localhost:8083", c)
-	reverseProxy("http://sale-service:8083", c)
+	reverseProxy("http://sale-service:8080", c)
 }
 func handleService5(c *gin.Context) {
 	// Forward request to Service 2
 	// reverseProxy("http://localhost:8084", c)
-	reverseProxy("http://onlineorder-service:8084", c)
+	reverseProxy("http://onlineorder-service:8080", c)
 }
 func handleService6(c *gin.Context) {
 	// Forward request to Service 2
 	// reverseProxy("http://localhost:8086", c)
-	reverseProxy("http://enquiry-service:8086", c)
+	reverseProxy("http://enquiry-service:8080", c)
 }
 
 // Reverse proxy function
