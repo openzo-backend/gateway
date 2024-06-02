@@ -15,6 +15,14 @@ func main() {
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"*"}
 	config.AllowHeaders = append(config.AllowHeaders, "Authorization") // Add "Authorization" header to allowed headers
+	config.AllowHeaders = append(config.AllowHeaders, "Content-Type")  // Add "Content-Type" header to allowed headers
+	config.AllowHeaders = append(config.AllowHeaders, "Accept")        // Add "Accept" header to allowed headers
+	config.AllowHeaders = append(config.AllowHeaders, "Origin")        // Add "Origin" header to allowed headers
+	config.AllowHeaders = append(config.AllowHeaders, "Upgrade")       // Add "Origin" header to allowed headers
+
+	config.AllowWebSockets = true
+
+	// config.AllowHeaders = true
 
 	// Route definition
 	router.Use(cors.New(config))
@@ -66,8 +74,8 @@ func handleService6(c *gin.Context) {
 
 func handleWebSocket(c *gin.Context) {
 	// Forward request to Service 2
-	// reverseProxy("http://localhost:8085", c)
-	reverseProxy("http://websocket-service:8080", c)
+	reverseProxy("http://localhost:8085", c)
+	// reverseProxy("http://websocket-service:8080", c)
 }
 
 // Reverse proxy function
