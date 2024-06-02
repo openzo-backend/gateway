@@ -35,6 +35,16 @@ func main() {
 
 	// Route definition
 	router.Use(cors.New(config))
+	router.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "welcome to the gateway",
+		})
+	})
 	router.Any("/users/*path", handleService1)
 	router.Any("/stores/*path", handleService2)
 	router.Any("/products/*path", handleService3)
