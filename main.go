@@ -24,7 +24,7 @@ func main() {
 	router.Any("/sales/*path", handleService4)
 	router.Any("/online_orders/*path", handleService5)
 	router.Any("/enquiry/*path", handleService6)
-
+	router.Any("/ws/*path", handleWebSocket)
 	// Add more routes for other microservices
 
 	router.Run(":8000") // Run server on port 8080
@@ -62,6 +62,12 @@ func handleService6(c *gin.Context) {
 	// Forward request to Service 2
 	// reverseProxy("http://localhost:8086", c)
 	reverseProxy("http://enquiry-service:8080", c)
+}
+
+func handleWebSocket(c *gin.Context) {
+	// Forward request to Service 2
+	// reverseProxy("http://localhost:8085", c)
+	reverseProxy("http://websocket-service:8080", c)
 }
 
 // Reverse proxy function
