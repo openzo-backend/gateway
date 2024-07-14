@@ -53,6 +53,8 @@ func main() {
 	router.Any("/enquiry/*path", handleService6)
 	router.Any("/ads/*path", handleService7)
 	router.Any("/search/*path", handleService8)
+	router.Any("/notifications/*path", handleService9)
+
 	router.Any("/ws/*path", handleWebSocket)
 	// Add more routes for other microservices
 
@@ -103,6 +105,12 @@ func handleService8(c *gin.Context) {
 	// Forward request to Service 2
 	// reverseProxy("http://localhost:8086", c)
 	reverseProxy("http://search-service:8080", c)
+}
+
+func handleService9(c *gin.Context) {
+	// Forward request to Service 2
+	// reverseProxy("http://localhost:8086", c)
+	reverseProxy("http://notification-service:8080", c)
 }
 
 func handleWebSocket(c *gin.Context) {
